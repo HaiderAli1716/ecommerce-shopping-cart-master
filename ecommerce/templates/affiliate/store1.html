@@ -1,0 +1,603 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Top99Deals</title>
+    
+    <!-- custom css -->
+    
+    <!-- <link rel="stylesheet" href="{% static 'css/styles.css' %}"> -->
+    {%block css%}
+    <style>
+   *, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-family: sans-serif;
+  font-size: 10px;
+}
+
+
+
+/* navbar */
+#header{
+  width:100%;
+  height: 100px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  z-index: 99;
+  box-shadow: 0 0 10px #000;
+  background: rgba(0,0,0,0.5);
+}
+#chk1{
+  display: none;
+   
+   
+}
+
+#i{
+  color: #fff;
+  cursor: pointer;
+}
+#header #logo{
+  flex: 1;
+  color:#fff;
+   
+  margin-left: 50px;
+  text-transform: uppercase;
+  font-size: 15px;
+}
+#header #search-box{
+  flex: 1;
+  position: relative;
+}
+#search-box input{
+  width:100%;
+  height: 40px;
+  border: none;
+  outline: none;
+  background:#f2f2f2;
+  border-radius: 30px;
+  color:gray;
+  font-size: 16px;
+  padding-left: 5px;
+  padding-right: 40px;
+  text-align: center;
+   
+}
+
+#search-box button{
+  cursor: pointer;
+  width:40px;
+  height: 40px;
+  border-radius: 30px;
+  border:none;
+  position: absolute;
+  top:0;
+  right: 0;
+  transform: scale(0.9);
+  background: green;
+  color: #fff;
+}
+#header #ul {
+  flex:2;
+  display: flex;
+  justify-content: space-evenly;
+}
+#header #ul #li{
+  list-style: none;
+}
+#header #ul #li #a{
+  text-decoration: none;
+  color:#fff;
+  font-weight: 600;
+  text-transform: uppercase;
+  padding: 10px 15px;
+}
+#header #ul #li #a:hover{
+  border-bottom: 2px solid cadetblue;
+}
+#header #menu{
+  font-size: 2.5em;
+  display: none;
+}
+@media(max-width:1000px){
+  #search-box button{
+      position: absolute;
+  }
+  #header ul{
+      position: fixed;
+      top:100px;
+      right: -100%;
+      background: rgba(0,0,0,0.5);
+      height: calc(100vh - 100px);
+      width:50%;
+      flex-direction: column;
+      align-items: center;
+      transition: right 0.5s linear;
+  }
+   
+#header #menu{
+      display: block;
+      width:100px;
+      text-align: center;
+  }
+  #chk1:checked ~ ul{
+      right: 0;
+      
+  }
+
+}
+
+.container_post {
+  margin-top: 30px;
+  background-color: transparent;
+  
+}
+
+.container_post h2 {
+  letter-spacing: 1px;
+  font-size: 40px;
+  color: #6968aa;
+  border: 2px dashed #0181a0;
+  padding: 7px;
+  text-transform: uppercase;
+  border-radius: 10px;
+  display: inline-block;
+  cursor: pointer;
+  text-align: center;
+  margin: 25px 0 30px 50px;
+  
+}
+.store_post{
+  background-color:transparent;
+  height:auto;
+  width:400px;
+  float: right;
+  margin: 4rem 2rem 0 0;
+  border: 1px solid #a6ffe9;
+  border-radius: 10px;
+}
+.postImg-container{
+  margin-top: 2.5rem;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+.postImg-containerImg{
+  width:200px; 
+  height:200px;
+  border-radius: 10px;
+}
+
+.blog-post {
+  border: 1px solid rgb(188, 85, 85);
+  width: 60%;
+  max-width: 98rem;
+  padding: .5rem;
+  background-color: transparent;
+  box-shadow: 0 1.4rem 8rem rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: flex;
+  border-radius: .8rem;
+  margin: .5rem;
+}
+
+.blog-post_img {
+  min-width: 20rem;
+  max-width: 20rem;
+  height: 16rem;
+  margin-top: 1.5rem;
+  position: relative;
+}
+
+.blog-post_img img {
+  width: 95%;
+  height:105%;
+  object-fit: cover;
+  
+  border-radius: .8rem;
+  display: block;
+}
+
+.blog-post_img img::before {
+  content: '';
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  box-shadow: .5rem .5rem 3rem 1px rgba(0, 0, 0, 0.5);
+  border-radius: .8rem;
+}
+
+.blog-post_date span {
+  display: block;
+  color: #00000080;
+  font-size: 1.6rem;
+  font-weight: 600;
+  margin: .3rem 0;
+}
+
+.blog-post_title {
+  font-size: 2.5rem;
+  margin: .5rem 1rem;
+  text-transform: uppercase;
+  color: #7c8d9c;
+}
+
+.blog-post_text {
+  margin-bottom: 1rem;
+  font-size: 1.4rem;
+  color: #000000b3;
+}
+.coupan_row{
+  display: flex;
+  align-items: center;
+  margin: 15px 0;
+  width: fit-content;
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+.cpnCode{
+  border: 1px dashed black;
+  padding: 10px 20px;
+  border-right: 0;
+  
+}
+.cpnBtn{
+  border: 1px solid black;
+  padding: 10px 20px;
+  color: black;
+  background:  #7c8d9c;
+  cursor: pointer;
+}
+.cpnBtn:hover{
+  background:  black;
+  border: 1px solid black;
+  padding: 10px 20px;
+  color: white;
+  cursor: pointer;
+  transition: 1s ease-in; 
+  
+}
+
+.blog-post_cta {
+  display: inline-block;
+  padding: 1.5rem 3rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  font-size: 1.2rem;
+  color: #fff;
+  text-decoration: none;
+  border-radius: .8rem;
+  background: linear-gradient(to right, #c945cf 0%, #04a6bd 100%);
+}
+
+.blog-post_cta:hover {
+  background: linear-gradient(to right, #04a6bd 0%, #c945cf 100%);
+}
+
+@media screen and (max-width: 1068px) {
+  .store_post {
+      float: left;
+      margin:5rem 5rem 0 0;
+
+  }
+  .blog-post {
+      max-width: 80rem;
+  }
+  .blog-post_img {
+      min-width: 30rem;
+      max-width: 30rem;
+  }
+  .container h2 {
+      margin-top: 120px;
+      margin-left: 275px;
+  }
+}
+
+@media screen and (max-width: 868px) 
+{
+  .store_post {
+      float: left;
+      margin:5rem 5rem 0 0;
+  }
+  .blog-post {
+      max-width: 70rem;
+  }
+  .container h2 {
+      margin-top: 20px;
+      margin-left: 142px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .store_post {
+      float: left;
+      margin:5rem 5rem 0 0;
+
+  }
+  .blog-post {
+      padding: 2.5rem;
+      flex-direction: column;
+  }
+  .blog-post_img {
+      min-width: 100%;
+      max-width: 100%;
+      transform: translate(0, -1rem);
+  }
+  .container {
+      margin-top: auto;
+  }
+}
+@media screen and (max-width: 576px) {
+  .container_post h2 {
+      letter-spacing: 1px;
+      font-size: 32px;
+      color: #6968aa;
+      border: 2px dashed #0181a0;
+      padding: 7px;
+      text-transform: uppercase;
+      border-radius: 10px;
+      display: inline-block;
+      cursor: pointer;
+      text-align: center;
+      margin-top: 46px;
+      margin-left: 4px;
+  }
+  .store_post {
+      width: 291px;
+      float: left;
+      margin: 1rem 5rem 3rem 0;
+      
+  }
+  .postImg-container {
+      align-items: center;
+      display: flex;
+      justify-content: center;
+      margin-top: 3rem;
+  }
+}
+
+@media screen and (max-width: 823px) {
+  .store_post {
+      float: left;
+  }
+  .container h2 {
+      margin-top: 35px;
+      margin-left: 142px;
+  }
+}
+      
+
+   
+
+/* footer */
+
+.container{
+	max-width: 1170px;
+	margin:auto;
+}
+.row{
+	display: flex;
+	flex-wrap: wrap;
+}
+ul{
+	list-style: none;
+}
+.footer{
+	background-color: #24262b;
+    padding: 70px 0;
+}
+.footer-col{
+   width: 25%;
+   padding: 0 15px;
+}
+.footer-col h4{
+	font-size: 18px;
+	color: #ffffff;
+	text-transform: capitalize;
+	margin-bottom: 35px;
+	font-weight: 500;
+	position: relative;
+}
+.footer-col h4::before{
+	content: '';
+	position: absolute;
+	left:0;
+	bottom: -10px;
+	background-color: #e91e63;
+	height: 2px;
+	box-sizing: border-box;
+	width: 50px;
+}
+.footer-col ul li:not(:last-child){
+	margin-bottom: 10px;
+}
+.footer-col ul li a{
+	font-size: 16px;
+	text-transform: capitalize;
+	color: #ffffff;
+	text-decoration: none;
+	font-weight: 300;
+	color: #bbbbbb;
+	display: block;
+	transition: all 0.3s ease;
+}
+.footer-col ul li a:hover{
+	color: #ffffff;
+	padding-left: 8px;
+}
+.footer-col .social-links a{
+	display: inline-block;
+	height: 40px;
+	width: 40px;
+	background-color: rgba(255,255,255,0.2);
+	margin:0 10px 10px 0;
+	text-align: center;
+	line-height: 40px;
+	border-radius: 50%;
+	color: #ffffff;
+	transition: all 0.5s ease;
+}
+.footer-col .social-links a:hover{
+	color: #24262b;
+	background-color: #ffffff;
+}
+
+/*responsive*/
+@media(max-width: 767px){
+  .footer-col{
+    width: 50%;
+    margin-bottom: 30px;
+}
+}
+@media(max-width: 574px){
+  .footer-col{
+    width: 100%;
+}
+}
+   
+    </style>
+    {%endblock%}
+</head>
+
+<body>
+    <!-- nav bar -->
+    <header id="header">
+      <input type ="checkbox" name ="" id ="chk1">
+      <div id="logo"><h1>logo</h1></div>
+          <div id="search-box">
+              <form>
+                  <input type ="text" name ="search" id ="srch" placeholder="Search">
+                  <button type ="submit"><i id="i" class="fa fa-search"></i></button>
+              </form>
+          </div>
+          <ul id="ul">
+            <li id="li"><a id="a" href="\">Home</a></li>
+            <li id="li"><a id="a" href="core/store1/12">Store</a></li>
+            <li id="li"><a id="a" href="\core/categories">categories</a></li>
+            <li id="li"><a id="a" href="\core/about">About</a></li>
+              <li id='li'> 
+                <a id="a" href="#"><i id='i' class="fa fa-facebook"></i></a>
+                <a id="a" href="#"><i id='i' class="fa fa-twitter"></i></a>
+                <a id="a" href="#"><i id='i' class="fa fa-instagram"></i></a>
+                    
+              </li>
+          </ul>
+          <div id="menu">
+              <label for="chk1">
+                  <i class="fa fa-bars"></i>
+              </label>
+          </div>
+  </header>
+       
+
+
+        <div class="container_post">
+            <h2>Grab your Deals</h2>
+
+            <div class="store_post">
+            {%for i in cardsdata%}
+            <div class="postImg-container">
+                <img class="postImg-containerImg" src="{{i.image.url}}" alt="">
+                </div>
+                
+                <div style="margin:3rem;padding:.5rem;">
+                    <h1 style="text-align: center;margin-bottom: 2rem;text-decoration: underline;">{{i.name}}</h1>
+                    <p class="blog-post_text">
+                        {{i.desc}}
+                    </p>
+                </div>
+                {%endfor%}
+        </div>
+        {%for h in cardelement%}
+        <div class="blog-post">
+            <div class="blog-post_img">
+                
+                <img src="{{h.image.url}}"alt="">
+                   
+            </div>
+            <div class="blog-post_info">
+                <div class="blog-post_date">
+                    <span>Nov 12 2021</span>
+                </div>
+                <h1 class="blog-post_title">{{h.desc}}</h1>
+                <p class="blog-post_text">
+                    {{h.desc}}
+                </p>
+                <div class="coupan_row">
+                    <span class="cpnCode">{{h.code}}</span>
+                    <span class="cpnBtn" data-code="{{h.code}}">Copy Code</span>
+                </div>
+
+                <a href="{{h.link}}" class="blog-post_cta">Click here</a>
+                </div>
+            </div> 
+       {%endfor%}
+            
+        </div>
+       
+        
+<!-- footer -->
+
+        <footer class="footer">
+          <div class="container">
+            <div class="row">
+              <div class="footer-col">
+                <h4>company</h4>
+                <ul>
+                  <li><a href="#">about us</a></li>
+                  <li><a href="#">our services</a></li>
+                  <li><a href="#">privacy policy</a></li>
+                  <li><a href="#">affiliate program</a></li>
+                </ul>
+              </div>
+              <div class="footer-col">
+                <h4>get help</h4>
+                <ul>
+                  <li><a href="#">FAQ</a></li>
+                  <li><a href="#">shipping</a></li>
+                  <li><a href="#">returns</a></li>
+                  <li><a href="#">order status</a></li>
+                  <li><a href="#">payment options</a></li>
+                </ul>
+              </div>
+              <div class="footer-col">
+                <h4>online shop</h4>
+                <ul>
+                  <li><a href="#">watch</a></li>
+                  <li><a href="#">bag</a></li>
+                  <li><a href="#">shoes</a></li>
+                  <li><a href="#">dress</a></li>
+                </ul>
+              </div>
+              <div class="footer-col">
+                <h4>follow us</h4>
+                <div class="social-links">
+                  <a href="#"><i class="fab fa-facebook-f"></i></a>
+                  <a href="#"><i class="fab fa-twitter"></i></a>
+                  <a href="#"><i class="fab fa-instagram"></i></a>
+                  <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+       </footer>  
+      
+       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
+              integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
+              crossorigin="anonymous"></script>
+    </body>
+</html>

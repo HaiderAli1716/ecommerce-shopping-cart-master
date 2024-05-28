@@ -1,0 +1,31 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Store, Online Merchants, Coupon &amp; Discount -</title>
+    
+
+        <link rel="stylesheet" href="{%static 'css/categories.css'%}">
+</head>
+<body>  
+    <!-- Categories -->
+  <div class="main">
+    <div class="menu">
+      <h2 id="logo">Categories List</h2>
+      {%for items in products%}
+      <a href="?category={{items.id}}">{{items.name}}</a>
+      {%endfor%}
+    </div>
+    <div class="body">
+      <h1>Results</h1>
+      {%for n in filterid%}
+      
+      <a href="/core/store1/{{n.id}}/"><h4>{{n.name}}</h4></a>
+      {%endfor%}
+    </div>
+  </div>
+    
+   </body>
+   </html>

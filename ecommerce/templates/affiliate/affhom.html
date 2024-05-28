@@ -1,0 +1,475 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/css/bootstrap.min.css">
+
+    <title>Top99Deals</title>
+    
+    <!-- custom css -->
+    
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+    <script src="{% static 'slider.js' %}" defer></script>
+    
+    
+    <!-- animate css link -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    
+    <!-- google font link -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Coiny&display=swap" rel="stylesheet">
+    {%block css%}
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap");
+
+body{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+  
+}
+
+/* navbar */
+header{
+  width:100%;
+  height: 100px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  z-index: 99;
+  box-shadow: 0 0 10px #000;
+  background-color: #24262b
+}
+
+header .logo{
+  flex: 1;
+  color:#5f5252;
+   
+  margin-left: 50px;
+  text-transform: uppercase;
+  font-size: 15px;
+}
+header .search-box{
+  flex: 1;
+  position: relative;
+  margin-right: 50px;
+}
+.search-box input{
+  width: 100%;
+  height: 40px;
+  border: none;
+  outline: none;
+  background:#f2f2f2;
+  border-radius: 30px;
+  color:rgb(192, 38, 38);
+  font-size: 16px;
+  padding-left: 5px;
+  padding-right: 40px;
+  text-align: center;
+   
+}
+
+.search-box button{
+  cursor: pointer;
+  width:40px;
+  height: 40px;
+  border-radius: 30px;
+  border:none;
+  position: absolute;
+  top:0;
+  right: 0;
+  transform: scale(0.9);
+  background: green;
+  color: #fff;
+}
+header ul {
+  flex:2;
+  display: flex;
+  justify-content: space-evenly;
+}
+header ul li{
+  list-style: none;
+}
+header ul li a{
+  text-decoration: none;
+  color:#fff;
+  font-weight: 600;
+  text-transform: uppercase;
+  padding: 10px 15px;
+}
+header ul li a:hover{
+  border-bottom: 2px solid cadetblue;
+}
+header .menu{
+  font-size: 2.5em;
+  display: none;
+}
+@media(max-width:1000px){
+  .search-box button{
+      position: absolute;
+  }
+  header ul{
+      position: fixed;
+      top:100px;
+      right: -100%;
+      background: rgba(0,0,0,0.5);
+      height: calc(100vh - 100px);
+      width:50%;
+      flex-direction: column;
+      align-items: center;
+      transition: right 0.5s linear;
+  }
+   
+  header .menu{
+      display: block;
+      width:100px;
+      text-align: center;
+  }
+  #chk1:checked ~ ul{
+      right: 0;
+      
+  }
+
+}
+/* card desgn */
+
+#flex-box{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+#card{
+  background: #FFF;
+  width: 250px;
+  margin: 20px;
+  box-shadow: 0px 0px 20px rgba(0,0,0,0.05);
+  box-sizing: border-box;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+#img{
+  height: 200px;
+  width: 100%;
+  border-radius: 5px;
+  background-size: cover;
+}
+.btnnn{
+  background: none;
+  border: 2px solid #000;
+  font-family: "montserrat",sans-serif;
+  text-transform: uppercase;
+  padding: 12px 20px;
+  min-width: 200px;
+  margin: 10px;
+  cursor: pointer;
+  transition: color 0.4s linear;
+  position: relative;
+}
+.btnnn:hover{
+  color: #fff;
+}
+.btnnn::before{
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: #000;
+  z-index: -1;
+  transition: transform 0.5s;
+  transform-origin: 0 0;
+  transition-timing-function: cubic-bezier(0.5,1.6,0.4,0.7);
+}
+.btnnn1::before{
+  transform: scaleX(0);
+}
+.btnnn1:hover::before{
+  transform: scaleX(1);
+}
+.btnnn2{
+  width: 123px;
+  height: 50px;
+  border: none;
+  color: rgb(15, 7, 7);
+  border-radius: 4px;
+  transition: ease-out 0.3s;
+  font-size: 1rem;
+  outline: none;
+  position: relative;
+  z-index: 1;
+  background:rgba(131, 113, 113, 0.379);
+}
+.btnnn2:hover{
+  background: rgb(0, 0, 0);
+  color: rgb(224, 224, 224);
+  border: 3px solid cadetblue;
+  cursor: pointer;
+}
+.btnnn2::before{
+  transition:0.5s all ease; 
+  content: "";
+  position: absolute;
+  left: 50%;
+  right: 50%;
+  bottom: 0;
+  opacity: 0;
+  background: rgb(37, 152, 135);
+  transform: scaleY(0);
+ 
+}
+
+.btnnn2:hover::before{
+  transition: 0.5s all ease;
+ transform: scaleY(1);
+}
+
+
+/* footer */
+
+.container{
+	max-width: 1170px;
+	margin:auto;
+}
+.row{
+	display: flex;
+	flex-wrap: wrap;
+}
+ul{
+	list-style: none;
+}
+.footer{
+	background-color: #24262b;
+    padding: 70px 0;
+}
+.footer-col{
+   width: 25%;
+   padding: 0 15px;
+}
+.footer-col h4{
+	font-size: 18px;
+	color: #ffffff;
+	text-transform: capitalize;
+	margin-bottom: 35px;
+	font-weight: 500;
+	position: relative;
+}
+.footer-col h4::before{
+	content: '';
+	position: absolute;
+	left:0;
+	bottom: -10px;
+	background-color: #e91e63;
+	height: 2px;
+	box-sizing: border-box;
+	width: 50px;
+}
+.footer-col ul li:not(:last-child){
+	margin-bottom: 10px;
+}
+.footer-col ul li a{
+	font-size: 16px;
+	text-transform: capitalize;
+	color: #ffffff;
+	text-decoration: none;
+	font-weight: 300;
+	color: #bbbbbb;
+	display: block;
+	transition: all 0.3s ease;
+}
+.footer-col ul li a:hover{
+	color: #ffffff;
+	padding-left: 8px;
+}
+.footer-col .social-links a{
+	display: inline-block;
+	height: 40px;
+	width: 40px;
+	background-color: rgba(255,255,255,0.2);
+	margin:0 10px 10px 0;
+	text-align: center;
+	line-height: 40px;
+	border-radius: 50%;
+	color: #ffffff;
+	transition: all 0.5s ease;
+}
+.footer-col .social-links a:hover{
+	color: #24262b;
+	background-color: #ffffff;
+}
+
+/*responsive*/
+@media(max-width: 767px){
+  .footer-col{
+    width: 50%;
+    margin-bottom: 30px;
+}
+}
+@media(max-width: 574px){
+  .footer-col{
+    width: 100%;
+}
+}
+
+    </style>
+    {%endblock%}
+  </head>
+
+<body>
+    <!-- nav bar -->
+    <header>
+      
+      <div class="logo">
+        <img src="" alt="logo">
+      </div>
+          
+          <ul>
+              <li><a href="#">Home</a></li>
+              <li><a href="#">Product</a></li>
+              <li><a href="#">Blog</a></li>
+              <li><a href="#">Contact</a></li>
+    
+          </ul>
+          <div class="search-box">
+            <form>
+                <input type ="text" name ="search" id ="srch" placeholder="Search">
+                <button type ="submit"><i class="fa fa-search"></i></button>
+            </form>
+        </div>
+  </header>
+
+
+
+    <!-- slider section -->
+    <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-indicators">
+          <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
+              aria-current="true" aria-label="Slide 1"></button>
+          <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"
+              aria-label="Slide 2"></button>
+          <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
+              aria-label="Slide 3"></button>
+      </div>
+      <div class="carousel-inner">
+          {% for object in carousel%}
+          <div class="carousel-item {% if forloop.counter0 == 0 %}active{% endif %}">
+            <a href="{{object.link}}"> <img src="{{object.image.url}}" style="height:650px;" class="testi-overly d-block w-100" alt="sliderImg"></a>
+              <div class="carousel-caption d-none d-md-block">
+                  <h1 class="animate__animated
+                  {% if forloop.counter0 == 0 %}
+                  animate__fadeInDown
+                  {% endif %}
+                  {% if forloop.revcounter == 1 %}
+                  animate__bounce
+                  {% endif %}
+                  {% if forloop.revcounter == 2 %}
+                  animate__fadeInRight
+                  {% endif %}">{{object.title}}</h1>
+                  <h3 class="animate__animated animate__zoomIn">{{object.sub_title}}</h3>
+                  <a href="{{object.link}}" class="button animate__animated animate__zoomIn mt-3 py-3 px-5 btn font-weight-bold">{{object.action_name}}</a>
+              </div>
+          </div>
+          {% endfor %}
+      </div>
+  </div>
+
+    
+   
+       
+      <!-- heading -->
+      <div class="container mt-5" style="height: 5rem; width:100%;display: flex; justify-content: space-between; align-items: center;">
+        <div style="
+            border-bottom: 3px outset black;
+            font-size: x-large;
+            font-weight: 500;">Papular Stores</div>
+        <div><button class="btnnn btnnn1" type="button">View All</button></div>
+      </div>
+      
+      <!-- cards  -->
+      <div class="container">
+        <div class="row my-2 bg-light bg-gradient">
+          {%for n in cardsdata%}
+          <div class="col-12 col-md-6 col-lg-4 pt-2 mt-2">
+            <div class="card" id="card">
+              <img id="img" src="{{n.image.url}}" height='200' alt="an image" class="card-img-top">
+              <div class="card-body">
+                <h5 class="card-title">{{n.name}}</h5>
+                <p class="card-text">{{n.desc|slice:"0:40"}}...</p>
+                <a href="/core/store1/{{n.id}}/">
+                  <button class="btnnn2 btnnn2" >Visit Store</button></a>
+              </div>
+             
+            </div>
+          </div>
+          {%endfor%}
+        </div>   
+      </div>
+     
+  <!-- footer -->
+
+<footer class="footer">
+    <div class="container">
+      <div class="row">
+        <div class="footer-col">
+          <h4>company</h4>
+          <ul>
+            <li><a href="#">about us</a></li>
+            <li><a href="#">our services</a></li>
+            <li><a href="#">privacy policy</a></li>
+            <li><a href="#">affiliate program</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>get help</h4>
+          <ul>
+            <li><a href="#">FAQ</a></li>
+            <li><a href="#">shipping</a></li>
+            <li><a href="#">returns</a></li>
+            <li><a href="#">order status</a></li>
+            <li><a href="#">payment options</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>online shop</h4>
+          <ul>
+            <li><a href="#">watch</a></li>
+            <li><a href="#">bag</a></li>
+            <li><a href="#">shoes</a></li>
+            <li><a href="#">dress</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>follow us</h4>
+          <div class="social-links">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+ </footer>  
+
+ <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
+        crossorigin="anonymous"></script>
+  
+</body>
+
+
+</html>
